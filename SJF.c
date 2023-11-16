@@ -36,9 +36,9 @@ void scheduleSJF(Process* processes, int n) {
 int main() {
     Process processes[] = {
         {1, 0, 6},
-        {2, 1, 8},
-        {3, 2, 7},
-        {4, 3, 3}
+        {2, 0, 8},
+        {3, 0, 7},
+        {4, 0, 3}
     };
     int num_processes = sizeof(processes) / sizeof(processes[0]);
 
