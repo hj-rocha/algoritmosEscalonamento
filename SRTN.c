@@ -48,11 +48,12 @@ void simulateSRTN(struct Process proc[], int n) {
 
 int main() {
     // Dados de teste
-    int n = 3;
+    int n = 4;
     struct Process proc[] = {
         {1, 0, 6, 6},
         {2, 2, 8, 8},
-        {3, 4, 7, 7}
+        {3, 4, 7, 7},
+		{4, 3, 1, 1}
     };
 
     // Simula o escalonador SRTN
@@ -60,3 +61,7 @@ int main() {
 
     return 0;
 }
+
+/**
+ * Neste exemplo, a função simulateSRTN simula o escalonador SRTN. O algoritmo encontra o processo com o menor tempo restante a cada unidade de tempo e o executa por 1 unidade de tempo. O tempo atual do sistema é atualizado conforme os processos são executados, e a saída do programa mostra quando cada processo é executado. Note que esta é uma simulação simples e não leva em consideração aspectos mais complexos, como preempção ou prioridades.
+*/
