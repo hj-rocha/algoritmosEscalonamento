@@ -88,6 +88,10 @@ void runScheduler(struct Queue* rrQueue, struct Queue* fcfsQueue) {
             struct Process p3 = {7, "interativo", 4, 4};
             enqueue(rrQueue, p3);
         }
+        if (current_time == 30) {
+            struct Process p9 = {9, "interativo", 4, 4};
+            enqueue(rrQueue, p9);
+        }
 
         // Executa processos da fila Round-Robin
         if (!isEmpty(rrQueue)) {
