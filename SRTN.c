@@ -51,7 +51,7 @@ int main() {
     int n = 4;
     struct Process proc[] = {
         {1, 0, 6, 6},
-        {2, 2, 8, 8},
+        {2, 2, 8, 8},  // Se alterar para 2 2 3 3.
         {3, 4, 7, 7},
 		{4, 3, 1, 1}
     };

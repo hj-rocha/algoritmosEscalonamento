@@ -41,6 +41,7 @@ int main() {
         {4, 0, 3}
     };
     int num_processes = sizeof(processes) / sizeof(processes[0]);
+    printf("Numero de processos: %d \n",num_processes);
 
     scheduleSJF(processes, num_processes);
 
