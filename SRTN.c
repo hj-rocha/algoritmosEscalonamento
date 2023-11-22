@@ -51,8 +51,8 @@ int main() {
     int n = 4;
     struct Process proc[] = {
         {1, 0, 6, 6},
-        {2, 2, 8, 8},  // Se alterar para 2 2 3 3.
-        {3, 4, 7, 7},
+        {2, 2, 8, 8},  // Se alterar para 2 2 3 3, o processo 2 se torna o segundo mais curto e
+        {3, 4, 7, 7},  // e será executado em segundo lugar.
 		{4, 3, 1, 1}
     };
 

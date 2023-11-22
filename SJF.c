@@ -30,7 +30,7 @@ void scheduleSJF(Process* processes, int n) {
         printf("Executando processo %d: Tempo de espera = %d, Tempo de burst = %d\n", processes[i].id, waiting_time[i], processes[i].burst_time);
     }
 
-    printf("Tempo médio de espera = %.2f\n", (float)total_waiting_time / n);
+    printf("Tempo medio de espera = %.2f\n", (float)total_waiting_time / n);
 }
 
 int main() {
