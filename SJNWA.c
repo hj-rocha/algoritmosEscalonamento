@@ -22,17 +22,18 @@ void sjnAgingScheduler(struct Process proc[], int n) {
         for (int i = 0; i < n; i++) {
             if (proc[i].remaining_time > 0) {
                 // Fórmula de envelhecimento: tempo restante + (idade / 2)
-                int priority = proc[i].remaining_time + (proc[i].age / 2);
-
+                //int priority = proc[i].remaining_time + (proc[i].age / 2);
+                int priority = proc[i].age = (proc[i].age + proc[i].remaining_time)/2;
+                
                 if (priority < shortest_job_time) {
                     shortest_job_index = i;
                     shortest_job_time = priority;
                 }
 
                 // Incrementa a idade dos processos não escolhidos
-                if (i != shortest_job_index) {
-                    proc[i].age++;
-                }
+                //if (i != shortest_job_index) {
+                  // proc[i].remaining_time++;
+                //}
             }
         }
 
@@ -52,10 +53,10 @@ int main() {
     // Dados de teste
     int n = 4;
     struct Process proc[] = {
-        {1, 6, 6, 0},
-        {2, 8, 8, 0},
-        {3, 7, 7, 0},
-        {4, 3, 3, 0}
+        {1, 6, 6, 6},
+        {2, 8, 8, 8},
+        {3, 7, 7, 7},
+        {4, 3, 3, 3}
     };
 
     // Simula o escalonador SJN com envelhecimento

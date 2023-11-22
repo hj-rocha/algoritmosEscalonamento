@@ -197,6 +197,7 @@ void escalonar(struct CircularList* list, int *numero_processos_na_fila, int *cu
     struct Process p = findLowestPriority(list);
 
      printf("id: %d, burst_time: %d,remaining_time: %d, priority: %f \n",p.id, p.burst_time, p.remaining_time, p.priority);
+     // "Executa o processo nessa linha que está sendo simulado pelo decremento."
      p.remaining_time--;
 
     float prioridade = calcularPrioridadeDoPorcesso(&*numero_processos_na_fila, &*current_time, p.burst_time, p.remaining_time, p.arrival_time);
@@ -233,17 +234,17 @@ int main() {
 
     while (current_time <= TEMPO_PC_LIGADO) {
 
-/*
+
        arrival_time = 10;
         if (current_time == arrival_time) {
             int burst_time = 5;
             int remaining_time = 5;
-            float prioridade = 0.0;
-            printf("priorida de 2: %f \n",prioridade);
+            float prioridade = 1.0;
+            printf("Inserido processo 2 de prioridade: %f \n",prioridade);
             struct Process p2 = {2, arrival_time, burst_time, remaining_time, prioridade};
             insert(list, p2, &numero_processos_na_fila);
         }
-*/
+
      
         if (numero_processos_na_fila > 0) {
             printf("numero de processos na fila: %d \n", numero_processos_na_fila);
@@ -252,6 +253,8 @@ int main() {
         }
         current_time++;
     }
+
+    printf("Terminado pelo tempo %d",TEMPO_PC_LIGADO);
 
     return 0;
 }
