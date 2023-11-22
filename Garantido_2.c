@@ -168,9 +168,7 @@ void updateProcess(struct CircularList* list, int processId, int timeReduced) {
         exit(EXIT_FAILURE);
     }
 
-
     struct Node* current = list->rear->next;
-
 
     do {
         if (current->process.id == processId) {
@@ -181,7 +179,6 @@ void updateProcess(struct CircularList* list, int processId, int timeReduced) {
             }
             return;
         }
-
 
         current = current->next;
     } while (current != list->rear->next);
@@ -222,10 +219,8 @@ void escalonar(struct CircularList* list) {
     // Buscar o processo de menor prioridade
     struct Process lowestPriorityProcess = findLowestPriority(list);
 
-
     // Atualizar o processo
     updateProcess(list, lowestPriorityProcess.id, 1);
-
 
     // Exibir informações do processo escalonado
     printf("Tempo: %d - Processo escalonado: id=%d, remaining_time=%d, priority=%f, numero_processos_na_lista=%d\n",
@@ -233,44 +228,41 @@ void escalonar(struct CircularList* list) {
            lowestPriorityProcess.priority, numero_processos_na_lista);
 }
 
-
 int main() {
     // Criar lista circular
     struct CircularList* list = createCircularList();
 
-
     // Dados de teste
     struct Process p1 = {1, 0, 33, 33, 0.5};
-    struct Process p2 = {2, 7, 15, 15, 0.8};
-    struct Process p3 = {3, 12, 40, 40, 0.6};
+    //struct Process p2 = {2, 7, 15, 15, 0.8};
+    //struct Process p3 = {3, 12, 40, 40, 0.6};
 
 
     // Inserir processos na lista circular
     insert(list, p1);
-    insert(list, p2);
-    insert(list, p3);
+    //insert(list, p2);
+   // insert(list, p3);
 
 
     // Configurar tempo total do PC ligado
-    int TEMPO_PC_LIGADO = 400;
+    int TEMPO_PC_LIGADO = 200;
     //int current_time = 0;
 
 
-    // Loop principal
     while (current_time <= TEMPO_PC_LIGADO) {
         if(current_time == 7){
+            struct Process p2 = {2, 7, 15, 15, 0};
             insert(list, p2);
         }
         if(current_time == 12){
+            struct Process p3 = {3, 12, 40, 40, 0.6};
             insert(list, p3);
         }
 
-
         escalonar(list);
         current_time++;
-        printf("current_time while: %d \n",current_time);
+     printf("current_time while: %d \n",current_time);
     }
-
 
     return 0;
 }

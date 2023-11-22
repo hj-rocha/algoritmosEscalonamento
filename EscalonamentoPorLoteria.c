@@ -54,7 +54,7 @@ int main() {
     processes[2].tickets = 3;
 
     // Simulação de escalonamento por loteria
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 50; i++) {
         lotteryScheduling(processes, numProcesses);
     }
 

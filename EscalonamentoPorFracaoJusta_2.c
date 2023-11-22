@@ -3,8 +3,8 @@
 #include <time.h>
 #include <math.h>
 
-#define TEMPO_PC_LIGADO 400
-float QUANTA = 10;
+#define TEMPO_PC_LIGADO 100
+float QUANTA = 100.0;
 
 // Estrutura para representar um processo
 typedef struct {
@@ -56,11 +56,13 @@ void lotteryScheduling(Processo *processes, int numProcesses) {
     }
 }
 
-void escalonar( Usuario *usuarios ){
-    int tempo_para_executar = ceil(QUANTA/usuarios->percentual_CPU);
-    int numProcessos = sizeof(usuarios->processos)/sizeof(int);
+void escalonar( Usuario *usuario ){
+    int tempo_para_executar = ceil(QUANTA/usuario->percentual_CPU);
+    int numProcessos = usuario->num_processos;
+    printf("tempo para executar %d \n", tempo_para_executar);
+    printf("numero de processos %d \n", numProcessos);
     for(int i =0; i< tempo_para_executar; i++){
-        lotteryScheduling(usuarios->processos, numProcessos);
+        lotteryScheduling(usuario->processos, numProcessos);
     }
 }
 
@@ -90,7 +92,7 @@ int main() {
     lista_usuarios[1].num_processos = 1;
     lista_usuarios[1].processos = (Processo *)malloc(sizeof(Processo) * lista_usuarios[1].num_processos);
 
-    lista_usuarios[1].processos[0].id = 1;
+    lista_usuarios[1].processos[0].id = 3;
     lista_usuarios[1].processos[0].tickets = 8;
     lista_usuarios[1].processos[0].tempo_execucao = 3;
     lista_usuarios[1].processos[0].tempo_executado = 0;
@@ -100,18 +102,18 @@ int main() {
     lista_usuarios[2].num_processos = 3;
     lista_usuarios[2].processos = (Processo *)malloc(sizeof(Processo) * lista_usuarios[2].num_processos);
 
-    lista_usuarios[2].processos[0].id = 1;
+    lista_usuarios[2].processos[0].id = 4;
     lista_usuarios[2].processos[0].tickets = 13;
     lista_usuarios[2].processos[0].tempo_execucao = 4;
     lista_usuarios[2].processos[0].tempo_executado = 0;
 
-    lista_usuarios[2].processos[1].id = 2;
+    lista_usuarios[2].processos[1].id = 5;
     lista_usuarios[2].processos[1].tickets = 15;
     lista_usuarios[2].processos[1].tempo_execucao = 2;
     lista_usuarios[2].processos[1].tempo_executado = 0;
 
-    lista_usuarios[2].processos[2].id = 3;
-    lista_usuarios[2].processos[2].tickets = 4;
+    lista_usuarios[2].processos[2].id = 6;
+    lista_usuarios[2].processos[2].tickets = 40;
     lista_usuarios[2].processos[2].tempo_execucao = 5;
     lista_usuarios[2].processos[2].tempo_executado = 0;
 

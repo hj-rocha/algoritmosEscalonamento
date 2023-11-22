@@ -233,7 +233,7 @@ int main() {
 
     while (current_time <= TEMPO_PC_LIGADO) {
 
-/*
+
        arrival_time = 10;
         if (current_time == arrival_time) {
             int burst_time = 5;
@@ -243,7 +243,7 @@ int main() {
             struct Process p2 = {2, arrival_time, burst_time, remaining_time, prioridade};
             insert(list, p2, &numero_processos_na_fila);
         }
-*/
+
      
         if (numero_processos_na_fila > 0) {
             printf("numero de processos na fila: %d \n", numero_processos_na_fila);

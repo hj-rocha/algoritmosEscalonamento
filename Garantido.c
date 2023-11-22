@@ -86,7 +86,7 @@ struct Process removeAt(struct CircularList* list, int *numero_processos_na_fila
     struct Process removedProcess;
 
     if (position == 0) {
-        removedProcess = removeFront(list, numero_processos_na_fila);
+        removedProcess = removeFront(list, *numero_processos_na_fila);
     } else {
         for (int i = 0; i < position - 1; i++) {
             current = current->next;
@@ -129,7 +129,7 @@ void removeProcess(struct CircularList* list, int *numero_processos_na_fila, str
     } while (current != list->rear->next);
 
     if (current->process.id == process.id) {
-        struct Process removedProcess = removeAt(list, numero_processos_na_fila, position);
+        struct Process removedProcess = removeAt(list, &*numero_processos_na_fila, position);
         printf("Process %d removed from the list\n", removedProcess.id);
     } else {
         printf("Process not found in the list\n");
@@ -219,7 +219,7 @@ void escalonar(struct CircularList* list, int *numero_processos_na_fila, int *cu
 
 int main() {
     int current_time = 0;
-    int TEMPO_PC_LIGADO = 200;
+    int TEMPO_PC_LIGADO = 400;
     int numero_processos_na_fila = 0;
 
     // Criar lista circular
@@ -228,6 +228,7 @@ int main() {
     // Dados de teste
     int arrival_time = 0;
     struct Process p1 = {1, arrival_time, 12, 12, 0.0};
+    
 
     // Inserir processos na lista circular
     insert(list, p1, &numero_processos_na_fila);
@@ -235,13 +236,13 @@ int main() {
     while (current_time <= TEMPO_PC_LIGADO) {
 
 
-       arrival_time = 10;
+      arrival_time = 5;
         if (current_time == arrival_time) {
             int burst_time = 5;
             int remaining_time = 5;
             float prioridade = 1.0;
             printf("Inserido processo 2 de prioridade: %f \n",prioridade);
-            struct Process p2 = {2, arrival_time, burst_time, remaining_time, prioridade};
+            struct Process p2 = {3, arrival_time, burst_time, remaining_time, prioridade};
             insert(list, p2, &numero_processos_na_fila);
         }
 
