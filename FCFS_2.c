@@ -46,6 +46,7 @@ void findAverageTime(struct Process proc[], int n) {
     float avg_tat = total_tat / n;
 
     // Exibe os resultados
+    printf("Process\tEntrada     \tExecucao  \tAguardando  \tResposta\n");
     printf("Process\tArrival Time\tBurst Time\tWaiting Time\tTurnaround Time\n");
     for (int i = 0; i < n; i++) {
         printf("%d\t%d\t\t%d\t\t%d\t\t%d\n", proc[i].id, proc[i].arrival_time, proc[i].burst_time, wt[i], tat[i]);
