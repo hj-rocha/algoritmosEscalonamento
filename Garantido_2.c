@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <float.h>
 
-
 // Estrutura para representar um processo
 struct Process {
     int id;             // Identificador do processo
@@ -12,26 +11,20 @@ struct Process {
     float priority;     // Prioridade do processo
 };
 
-
 // Estrutura para representar um nó da lista
 struct Node {
     struct Process process;
     struct Node* next;
 };
 
-
 // Estrutura para representar uma lista circular de processos
 struct CircularList {
     struct Node* rear;
 };
 
-
 // Variável global para contar o número de processos na lista
 int numero_processos_na_lista = 0;
-
-
 int current_time = 0;
-
 
 // Cria uma nova lista circular vazia
 struct CircularList* createCircularList() {
@@ -39,7 +32,6 @@ struct CircularList* createCircularList() {
     list->rear = NULL;
     return list;
 }
-
 
 // Método para calcular a prioridade de um processo
 float calcularPrioridadeDoPorcesso(int burst_time, int remaining_time, int arrival_time) {
@@ -53,12 +45,10 @@ float calcularPrioridadeDoPorcesso(int burst_time, int remaining_time, int arriv
     return f;
 }
 
-
 // Insere um processo no final da lista circular
 void insert(struct CircularList* list, struct Process process) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->process = process;
-
 
     if (list->rear == NULL) {
         list->rear = newNode;
@@ -69,12 +59,10 @@ void insert(struct CircularList* list, struct Process process) {
         list->rear = newNode;
     }
 
-
     // Atualizar a variável global
     printf("##### PROCESSO: %d INSERIDO ###### \n", process.id);
     numero_processos_na_lista++;
 }
-
 
 // Busca o processo de menor prioridade na lista circular
 struct Process findLowestPriority(struct CircularList* list) {
@@ -83,17 +71,18 @@ struct Process findLowestPriority(struct CircularList* list) {
         exit(EXIT_FAILURE);
     }
 
-
     struct Node* current = list->rear->next;
     struct Process lowestPriorityProcess = current->process;
     float lowest_priority_value = FLT_MAX;
-
 
     do {
         struct Process p = current->process;
         if (p.remaining_time > 0) {
             // Calcular prioridade
-            float prioridade = calcularPrioridadeDoPorcesso( p.burst_time, p.remaining_time, p.arrival_time);
+            float prioridade = p.priority;
+            if(p.burst_time > p.remaining_time ){
+                prioridade = calcularPrioridadeDoPorcesso( p.burst_time, p.remaining_time, p.arrival_time);
+            }
             p.priority = prioridade;
              //updateProcessPriority(list, p.id,prioridade);
             printf("Current_time: %d , process.id: %d, process.priority: %f \n",current_time, p.id, p.priority);
@@ -103,14 +92,11 @@ struct Process findLowestPriority(struct CircularList* list) {
             }
         }
 
-
         current = current->next;
     } while (current != list->rear->next);
 
-
     return lowestPriorityProcess;
 }
-
 
 // Remove o processo da lista circular
 void removeProcess(struct CircularList* list, struct Process process) {
@@ -119,10 +105,8 @@ void removeProcess(struct CircularList* list, struct Process process) {
         exit(EXIT_FAILURE);
     }
 
-
     struct Node* current = list->rear->next;
     struct Node* prev = NULL;
-
 
     do {
         if (current->process.id == process.id) {
@@ -130,36 +114,27 @@ void removeProcess(struct CircularList* list, struct Process process) {
                 list->rear = prev;
             }
 
-
             if (prev == NULL) {
                 list->rear->next = current->next;
             } else {
                 prev->next = current->next;
             }
 
-
             free(current);
-
 
             // Atualizar a variável global
            printf("##### PROCESSO: %d REMOVIDO ###### \n", process.id);
 
-
             numero_processos_na_lista--;
-
-
             return;
         }
-
 
         prev = current;
         current = current->next;
     } while (current != list->rear->next);
 
-
     printf("Process not found in the list\n");
 }
-
 
 // Atualiza o remaining_time de um processo na lista
 void updateProcess(struct CircularList* list, int processId, int timeReduced) {
@@ -183,10 +158,8 @@ void updateProcess(struct CircularList* list, int processId, int timeReduced) {
         current = current->next;
     } while (current != list->rear->next);
 
-
     printf("Process not found in the list\n");
 }
-
 
 //Atualiza a priority do processo
 void updateProcessPriority(struct CircularList* list, int processId, float priority) {
@@ -195,9 +168,7 @@ void updateProcessPriority(struct CircularList* list, int processId, float prior
         exit(EXIT_FAILURE);
     }
 
-
     struct Node* current = list->rear->next;
-
 
     do {
         if (current->process.id == processId) {
@@ -205,14 +176,11 @@ void updateProcessPriority(struct CircularList* list, int processId, float prior
             return;
         }
 
-
         current = current->next;
     } while (current != list->rear->next);
 
-
     printf("Process not found in the list\n");
 }
-
 
 // Escalonador de processos
 void escalonar(struct CircularList* list) {
@@ -237,21 +205,18 @@ int main() {
     //struct Process p2 = {2, 7, 15, 15, 0.8};
     //struct Process p3 = {3, 12, 40, 40, 0.6};
 
-
     // Inserir processos na lista circular
     insert(list, p1);
     //insert(list, p2);
    // insert(list, p3);
 
-
     // Configurar tempo total do PC ligado
     int TEMPO_PC_LIGADO = 200;
     //int current_time = 0;
 
-
     while (current_time <= TEMPO_PC_LIGADO) {
         if(current_time == 7){
-            struct Process p2 = {2, 7, 15, 15, 0};
+            struct Process p2 = {2, 7, 15, 15, 0.4};
             insert(list, p2);
         }
         if(current_time == 12){
