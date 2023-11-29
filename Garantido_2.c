@@ -38,8 +38,8 @@ float calcularPrioridadeDoPorcesso(int burst_time, int remaining_time, int arriv
     float h, t;
     int n;
     n = numero_processos_na_lista;
-    h = burst_time - remaining_time;
-    t = current_time - arrival_time;
+    h = burst_time - remaining_time;   //h eh o tempo que ele ja executou
+    t = current_time - arrival_time;    // t tempo que ele esta no sistema
     float f = h / t;
     f = f / n;
     return f;

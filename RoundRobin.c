@@ -43,7 +43,7 @@ int main() {
         {3, 8, 8}
     };
 
-    int time_quantum = 2;  // Quantum de tempo
+    int time_quantum = 02;  // Quantum de tempo
 
     // Simula o escalonador Round-Robin
     simulateRoundRobin(proc, n, time_quantum);

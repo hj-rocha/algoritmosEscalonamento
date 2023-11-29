@@ -21,7 +21,7 @@ void lotteryScheduling(struct Process *processes, int numProcesses) {
         totalTickets += processes[i].tickets;
     }
 
-    // Gera um número aleatório entre 0 e totalTickets-1
+    // Gera um número aleatório entre 0 e totalTickets
     int winner = rand() % totalTickets;
     printf("O numero gerado rh: %d", winner);
 
